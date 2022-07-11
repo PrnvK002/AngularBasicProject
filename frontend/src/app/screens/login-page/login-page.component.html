@@ -1,0 +1,18 @@
+<div class="container d-flex justify-content-center align-items-center mt-5" [ngStyle]="{ height : '50vh' }" >
+    <div class="box w-50 p-5 mt-5">
+        <h1 [ngStyle]=" {'text-align' : 'center'} " >LOgin</h1>
+        <div class=" d-flex flex-column justify-content-center m-5" >
+            <form class="d-flex flex-column" [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
+                <input formControlName="email" class="inputClass" type="email" placeholder="please enter your email"  >
+                <span style="color: red;font-size: small;" *ngIf="email && email.invalid && email.touched" >Please enter a valid email address </span>
+                
+                <input formControlName="password" class="inputClass" type="password" placeholder="please enter your password"  >
+                <span style="color: red;font-size: small" *ngIf="password && password.invalid && password.touched" >Please enter a valid password </span>
+                
+                <button type="submit" class="btn btn-success" [disabled]="loginForm.invalid" > Submit </button>
+            </form>
+            <a routerLink="/signup" > Don't have an account ? Create now. </a>
+        </div>
+
+    </div>
+</div>

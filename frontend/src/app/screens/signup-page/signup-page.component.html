@@ -1,0 +1,83 @@
+<div *ngIf="otpModal" style="position: absolute;top:30%;left:30%;width: 45%;">
+    <app-otp-modal></app-otp-modal>
+</div>
+<div
+  class="container d-flex justify-content-center align-items-center signupPage"
+  [ngStyle]="{ height: '50vh' }"
+>
+ 
+  <div class="box w-50 mt-5">
+    <h1 class="mt-3" [ngStyle]="{ 'text-align': 'center' }">SignUp</h1>
+    <div class="d-flex flex-column justify-content-center m-5">
+      <form class="d-flex flex-column" [formGroup]="signupForm" (ngSubmit)="onSubmit()" >
+        <label for="firstName"> First Name </label>
+        <span style="color: red;font-size: small;" *ngIf="firstName && firstName.invalid && firstName.touched" >Please enter a first name </span>
+        <input
+          id="firstName"
+          formControlName="firstName"
+          class="inputClass"
+          type="text"
+          placeholder="please enter your first name"
+        />
+        <label for="lastName"> Last Name </label>
+        <span style="color: red;font-size: small;" *ngIf="lastName && lastName.invalid && lastName.touched" >Please enter a last name </span>
+        <input
+          id="lastName"
+          formControlName="lastName"
+          class="inputClass"
+          type="text"
+          placeholder="please enter your last name"
+        />
+        <label for="email"> Email </label>
+        <span style="color: red;font-size: small;" *ngIf="email && email.invalid && email.touched" >Please enter a valid email address </span>
+        <input
+          id="email"
+          formControlName="email"
+          class="inputClass"
+          type="email"
+          placeholder="please enter your email"
+        />
+        <label for="phone"> Phone </label>
+        <span style="color: red;font-size: small" *ngIf="phone && phone.invalid && phone.touched" >Please enter a valid phone </span>
+        <input
+          id="phone"
+          formControlName="phone"
+          class="inputClass"
+          type="phone"
+          placeholder="please enter your phone"
+        />
+        <label for="password"> Password </label>
+        <span style="color: red;font-size: small" *ngIf="password && password.invalid && password.touched" >Please enter a valid password </span>
+        <input
+          id="password"
+          formControlName="password"
+          class="inputClass"
+          type="password"
+          placeholder="please enter your password"
+        />
+        <label for="confirmPassword"> confirm Password </label>
+        <span style="color: red;font-size: small" *ngIf="confirmPassword && confirmPassword.invalid && confirmPassword.touched" >Please enter a valid password </span>
+        <input
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          class="inputClass"
+          type="password"
+          placeholder="please enter your password"
+        />
+
+        <label for="dob"> Date Of Birth </label>
+        <span style="color: red;font-size: small" *ngIf="dob && dob.invalid && dob.touched" >Please enter a valid Date of birth </span>
+        <input
+          formControlName="dob"
+          id="dob"
+          class="inputClass"
+          type="date"
+          placeholder="please enter your Date of Birth"
+        />
+
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+      <a routerLink="/login"> Already have an account ? Login now. </a>
+    </div>
+  </div>
+</div>
