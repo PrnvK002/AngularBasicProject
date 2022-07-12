@@ -7,7 +7,7 @@ A brief description of what this project does and who it's for
 
 TWILIO_ACCOUNT_SID='AC0fb5e73fc214fe994d00bb1b4ab422fb'
 
-TWILIO_AUTH_TOKEN='b5aaa8f6c2049bf19811470e346d22dc'
+TWILIO_AUTH_TOKEN='a20cc1a530fc1fa95d449661b5194a58'
 
 MONGO_URI = 'mongodb+srv://user123:accessdata@blogs.ej6tx.mongodb.net/userDatabase?retryWrites=true&w=majority'
 
