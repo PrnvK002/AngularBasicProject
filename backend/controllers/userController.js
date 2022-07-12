@@ -138,7 +138,12 @@ export const updateProfile = asyncHandler(async (req,res) => {
             dob : req.body.dob
          } });
     if(update){
-        res.status(202).json({ message : 'Successfully updated' })
+        const userData = await User.findOne({ _id : req.body.id });
+        if(userData){
+            res.status(202).json({ ...userData });
+        }
+        res.status(404);
+        throw new Error('Failed to update profile');    
     }
     else{
         res.status(404);

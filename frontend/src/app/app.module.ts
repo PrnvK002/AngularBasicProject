@@ -11,6 +11,7 @@ import { LoginPageComponent } from './screens/login-page/login-page.component';
 import { ProfilePageComponent } from './screens/profile-page/profile-page.component';
 import { SignupPageComponent } from './screens/signup-page/signup-page.component';
 import { OtpModalComponent } from './components/otp-modal/otp-modal.component';
+import { SuccessMessageComponent } from './components/success-message/success-message.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { OtpModalComponent } from './components/otp-modal/otp-modal.component';
     ProfilePageComponent,
     SignupPageComponent,
     OtpModalComponent,
+    SuccessMessageComponent,
 
   ],
   imports: [

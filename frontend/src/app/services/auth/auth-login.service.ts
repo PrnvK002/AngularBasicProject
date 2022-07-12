@@ -20,6 +20,7 @@ export class AuthLoginService {
   
   public userData = {} as userDetails;
   public signupData = {} as signupModel;
+  public createStatus:boolean = false;
 
   basicUrl: string = 'http://localhost:5000/api/v1';
 
@@ -51,6 +52,7 @@ export class AuthLoginService {
         .post<any>(`${this.basicUrl}/register`,data, {headers})
         .subscribe({
           next : (data) => {
+            this.createStatus = true;
             resolve(data);
           },
           error : (error) => {
@@ -118,6 +120,9 @@ export class AuthLoginService {
         .put<any>(`${this.basicUrl}/profile`,data,{headers:customHeader})
         .subscribe({
           next : (data) =>{
+            localStorage.removeItem('userInfo');
+            localStorage.setItem('userInfo',JSON.stringify(data._doc));
+            this.userData = data._doc;
             resolve(data);
           },
           error : (err) => {
