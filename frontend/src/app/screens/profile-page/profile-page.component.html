@@ -38,6 +38,9 @@
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <div class="container mt-5 w-50">
+                <div class="d-flex justify-content-center" *ngIf="status" >
+                    <app-success-message [message]="message" ></app-success-message>
+                </div>
                 <h3 style="text-align:center;" > Edit Profile </h3>
                 <form [formGroup]="updateProfile" (ngSubmit)="onSubmit()" >
                     <div class="mb-3">

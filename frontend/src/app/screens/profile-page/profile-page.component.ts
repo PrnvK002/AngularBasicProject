@@ -17,6 +17,9 @@ export class ProfilePageComponent implements OnInit {
     phone : new FormControl(this.authService.userData.phone,[ Validators.required , Validators.minLength(10) , Validators.maxLength(10) ])
   });
 
+  message:string = 'Successfully updated Profile';
+  status:boolean = this.authService.status;
+
   constructor(
     public authService:AuthLoginService
   ) { }

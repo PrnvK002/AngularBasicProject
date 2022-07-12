@@ -1,3 +1,6 @@
+<div class="d-flex justify-content-center" *ngIf="status" >
+    <app-success-message [message]="message" ></app-success-message>
+</div>
 <div class="container d-flex justify-content-center align-items-center mt-5" [ngStyle]="{ height : '50vh' }" >
     <div class="box w-50 p-5 mt-5">
         <h1 [ngStyle]=" {'text-align' : 'center'} " >LOgin</h1>

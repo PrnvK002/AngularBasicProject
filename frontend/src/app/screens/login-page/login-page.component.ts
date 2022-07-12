@@ -14,7 +14,9 @@ export class LoginPageComponent implements OnInit {
     email : new FormControl('',[ Validators.required , Validators.email ]),
     password : new FormControl('',[Validators.required,Validators.minLength(6)])
   });
-  submitted = false;
+
+  message: string = "Successfully created the user"
+  status:boolean = this.authService.status;
 
   constructor( 
     private authService : AuthLoginService,
