@@ -8,17 +8,19 @@ export interface signupModel{
     lastName : string,
     email : string,
     phone : string,
-    dob : string,
+    dob : Date,
     password : string,
     confirmPassword : string
 }
 
 export interface userDetails{
+    _id : string,
     firstName : string,
     lastName : string,
     email : string,
     phone : string,
-    dob : string
+    dob : Date,
+    authToken:string
 }
 
 export type resolveModel = (data:userDetails)=>void;

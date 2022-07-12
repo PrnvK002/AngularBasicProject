@@ -18,22 +18,26 @@
           <a class="nav-link active" aria-current="page" href="">Home</a>
         </li>
       </ul>
-      <div *ngIf="user; then thenBlock; else elseBlock"></div>
+      <div *ngIf="authService.userData.authToken; then thenBlock; else elseBlock"></div>
       <ng-template class="dropdown" #thenBlock>
-        <button
-          class="btn btn-secondary dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton1"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        ></button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">Profile</a></li>
-          <li><a class="dropdown-item" href="#">Logout</a></li>
-        </ul>
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+          {{authService.userData.email}}
+        </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+            <li><a class="dropdown-item" (click)="logout()" >Logout</a></li>
+          </ul>
+        </div>
       </ng-template>
       <ng-template #elseBlock>
-        <button class="btn btn-secondary" type="button">login</button>
+        <button class="btn btn-secondary" type="button" routerLink="/login" >login</button>
       </ng-template>
     </div>
   </div>

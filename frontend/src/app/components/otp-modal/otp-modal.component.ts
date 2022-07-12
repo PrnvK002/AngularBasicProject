@@ -26,7 +26,7 @@ export class OtpModalComponent implements OnInit {
 
   onSubmit(){
     console.log(this.otpForm.value);
-    this.authService.signup(this.otpForm.value)
+    this.authService.signup(this.otpForm.value.otp)
       .then((data) => {
         this.router.navigate(['login']);
       })

@@ -29,8 +29,10 @@ export const authLogin = asyncHandler(async (req,res)=>{
                 _id: user._id,
                 email: user.email,
                 phone: user.phone,
-                username ,
+                firstName:user.firstName,
+                lastName:user.lastName,
                 authToken: generateToken(user._id),
+                dob:user.dob
               });
         } else {
             res.status(401);
@@ -38,6 +40,7 @@ export const authLogin = asyncHandler(async (req,res)=>{
           }
 
     }catch(err){
+        console.log(err);
         res.status(422);
         throw new Error('Please check your credentials');
     }
@@ -60,7 +63,6 @@ export const sendOtp = asyncHandler(async (req,res) => {
             .verifications
             .create({ to: `+91${phone}`, channel: 'sms' });
     
-        console.log(resp);
         res.json({ message: 'OTP send' });
     }catch(err){
         console.log(err);
@@ -72,9 +74,9 @@ export const sendOtp = asyncHandler(async (req,res) => {
 //@access public
 
 export const authSignup = asyncHandler(async (req,res) => {
-
+    console.log(req.body);
     try{
-        const result = await signupSchema(req.body);
+        const result = await signupSchema.validateAsync(req.body);
         const { phone } = req.body;
         const { status } = await client.verify.services(process.env.TWILIO_SERVICE)
         .verificationChecks
@@ -100,6 +102,7 @@ export const authSignup = asyncHandler(async (req,res) => {
             throw new Error('Please retry after sometime');
         }
     }catch(err){
+        console.log(err);
         res.status(422);
         throw new Error('Please check your credentials');
     }
@@ -117,4 +120,28 @@ export const getProfileData = asyncHandler(async (req,res) => {
     }
     res.status(404);
     throw new Error('Cannot find profile data');
-})
+});
+
+//@desc profile data
+//@route put /profile
+//@access public
+
+export const updateProfile = asyncHandler(async (req,res) => {
+    console.log(req.body);
+    const update = await User.updateOne(
+        { _id : req.body.id } , 
+        { $set : { 
+            firstName : req.body.firstName,
+            lastName : req.body.lastName,
+            email : req.body.email,
+            phone : req.body.phone,
+            dob : req.body.dob
+         } });
+    if(update){
+        res.status(202).json({ message : 'Successfully updated' })
+    }
+    else{
+        res.status(404);
+        throw new Error('Failed to update profile');     
+    }
+});

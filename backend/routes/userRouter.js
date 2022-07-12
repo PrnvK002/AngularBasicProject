@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { authLogin , authSignup , sendOtp , getProfileData } from '../controllers/userController.js';
+import { authLogin , authSignup , sendOtp , getProfileData , updateProfile } from '../controllers/userController.js';
 import authenticationMiddleware from '../middlewares/authentication.js';
 
 const router = Router();
@@ -28,6 +28,11 @@ router.post('/sendOtp',sendOtp);
 
 router.get('/profile/:id',authenticationMiddleware,getProfileData);
 
+//@desc profile data
+//@route put /profile
+//@access public
+
+router.put('/profile',authenticationMiddleware,updateProfile);
 
 export default router;
 

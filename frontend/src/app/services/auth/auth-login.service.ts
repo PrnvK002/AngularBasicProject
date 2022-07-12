@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, resolveForwardRef } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import {
   loginModel,
@@ -19,11 +19,13 @@ const headers = new HttpHeaders({
 export class AuthLoginService {
   
   public userData = {} as userDetails;
-  public signupData = {} as userDetails;
+  public signupData = {} as signupModel;
 
   basicUrl: string = 'http://localhost:5000/api/v1';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.getUserDetailsFromLocal();
+  }
 
   login(loginData: loginModel) {
     return new Promise((resolve: resolveModel, reject: any) => {
@@ -79,4 +81,60 @@ export class AuthLoginService {
     })
   }
 
+  public getProfileData(){
+    const id:string = this.userData._id; 
+    const authToken : string = this.userData.authToken;
+    const customHeader = new HttpHeaders({
+      authorization : `Bearer ${authToken}`,
+      'Content-Type': 'application/json',
+    })
+    return new Promise((resolve:any,reject:any) => {
+      this.http
+        .get<any>(`${this.basicUrl}/profile/${id}`,{ headers : customHeader })
+        .subscribe({
+          next : (data)=>{
+            resolve(data);
+          },
+          error:(error)=>{
+            reject(error);
+          }
+        })
+    })
+  }
+
+  public updateUser(userData:userDetails,id:string){
+    const authToken : string = this.userData.authToken;
+    const customHeader = new HttpHeaders({
+      authorization : `Bearer ${authToken}`,
+      'Content-Type': 'application/json',
+    });
+
+    const data = {
+      ...userData,
+      id
+    }
+    return new Promise((resolve,reject) => {
+      this.http
+        .put<any>(`${this.basicUrl}/profile`,data,{headers:customHeader})
+        .subscribe({
+          next : (data) =>{
+            resolve(data);
+          },
+          error : (err) => {
+            reject(err);
+          }
+        })
+    })
+  }
+
+  public logout( cb :()=>void ){
+    this.userData = { } as userDetails;
+    localStorage.removeItem('userInfo');
+    cb();
+  }
+
+  private getUserDetailsFromLocal(){
+    const userDetails = localStorage.getItem('userInfo');
+    userDetails &&
+      (this.userData = <userDetails>JSON.parse(userDetails));  }
 }

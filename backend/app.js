@@ -5,13 +5,17 @@ import cors from 'cors';
 import connectDB from './config/connection.js';
 import dotenv from 'dotenv';
 import { errorHandler, notFound } from './middlewares/errorHandler.js';
-
+import { createClient } from './config/twilio.js';
 
 dotenv.config({ path : '.env' });
 
 //================== Mongodb server connection ==============================
 
 connectDB();
+
+//========== twilio setup ================
+
+createClient();
 
 //========================== Route imports ==========================
 
