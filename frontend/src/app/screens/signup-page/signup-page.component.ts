@@ -70,4 +70,8 @@ export class SignupPageComponent implements OnInit {
         console.log(err);
       })
   }
+
+  public closeModal(){
+    this.otpModal = false;
+  }
 }

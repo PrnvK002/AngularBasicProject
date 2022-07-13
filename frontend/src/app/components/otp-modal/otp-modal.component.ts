@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input } from '@angular/core';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthLoginService } from 'src/app/services/auth/auth-login.service';
@@ -9,6 +9,8 @@ import { AuthLoginService } from 'src/app/services/auth/auth-login.service';
   styleUrls: ['./otp-modal.component.css']
 })
 export class OtpModalComponent implements OnInit {
+
+  @Input() handleClose:any;
 
   public otpForm:FormGroup = new FormGroup({
     otp : new FormControl('',[Validators.required])

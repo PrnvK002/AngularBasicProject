@@ -1,5 +1,5 @@
 <div *ngIf="otpModal" style="position: absolute;top:30%;left:30%;width: 45%;">
-    <app-otp-modal></app-otp-modal>
+    <app-otp-modal [handleClose]="closeModal()" ></app-otp-modal>
 </div>
 <div
   class="container d-flex justify-content-center align-items-center signupPage"

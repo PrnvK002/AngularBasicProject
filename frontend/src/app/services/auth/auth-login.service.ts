@@ -21,6 +21,7 @@ export class AuthLoginService {
   public userData = {} as userDetails;
   public signupData = {} as signupModel;
   public status:boolean = false;
+  public loginStatus:boolean = false;
 
   basicUrl: string = 'http://localhost:5000/api/v1';
 
@@ -36,6 +37,7 @@ export class AuthLoginService {
           next: (data) => {
             this.userData = data;
             localStorage.setItem('userInfo',JSON.stringify(data));
+            this.loginStatus = true;
             resolve(data);
           },
           error: (err) => {
@@ -136,6 +138,7 @@ export class AuthLoginService {
   public logout( cb :()=>void ){
     this.userData = { } as userDetails;
     localStorage.removeItem('userInfo');
+    this.loginStatus = false;
     cb();
   }
 
