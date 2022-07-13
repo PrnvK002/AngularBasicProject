@@ -15,6 +15,7 @@ export class LoginPageComponent implements OnInit {
     password : new FormControl('',[Validators.required,Validators.minLength(6)])
   });
 
+  invalid:string='';
   message: string = "Successfully created the user"
   status:boolean = this.authService.status;
 
@@ -36,12 +37,16 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.loginForm.value);
     let data = this.loginForm.value;
-    this.authService.login(data).then((data) => {
-      console.log(data);
-      this.router.navigate(['']);
-    }) 
+    this.authService.login(data)
+      .then((data) => {
+        console.log(data);
+        this.router.navigate(['']);
+      })
+      .catch((err) => {
+        console.log(err);
+        this.invalid = err.error.message;
+      }) 
   }
 
 }
